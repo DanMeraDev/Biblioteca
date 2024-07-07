@@ -1,0 +1,5 @@
+.media-view {
+    -fx-fit-width: 427px;
+    -fx-fit-height: 10vh;
+    -fx-alignment: top-left;
+}

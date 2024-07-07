@@ -30,11 +30,11 @@ public class SistemaBibliotecaFX extends Application {
     @Override
     public void start(Stage stage) throws Exception{
 
-        FXMLLoader loader = new FXMLLoader(BibliotecaVirtualApplication.class.getResource("/templates/index.fxml"));
+        FXMLLoader loader = new FXMLLoader(BibliotecaVirtualApplication.class.getResource("/templates/login.fxml"));
         loader.setControllerFactory(applicationContext::getBean);
 
 
-        Scene escena = new Scene(loader.load(), 1500, 1050);
+        Scene escena = new Scene(loader.load());
         stage.setScene(escena);
         stage.setTitle("Bliblioteca Virtual");
 //        stage.setFullScreen(true);

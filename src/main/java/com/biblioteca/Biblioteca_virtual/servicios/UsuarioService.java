@@ -22,6 +22,10 @@ public class UsuarioService {
         return usuarioRepository.findById(id);
     }
 
+    public Optional<Persona> obtenerUsuarioPorNombre(String nombre) {
+        return usuarioRepository.findByNombre(nombre);
+    }
+
     public Usuario guardarUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
