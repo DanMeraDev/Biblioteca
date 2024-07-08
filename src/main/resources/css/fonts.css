@@ -1,0 +1,13 @@
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('/fonts/Roboto-Bold.ttf') format('truetype');
+}
+
+.root {
+    -fx-font-family: 'Roboto';
+}
+
+.label, .text-field, .password-field, .button {
+    -fx-font-family: 'Roboto';
+}

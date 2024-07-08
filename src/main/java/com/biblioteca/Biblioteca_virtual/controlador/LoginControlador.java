@@ -5,11 +5,15 @@ import com.biblioteca.Biblioteca_virtual.modelos.Usuario;
 import com.biblioteca.Biblioteca_virtual.servicios.UsuarioService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -18,12 +22,14 @@ import java.util.Optional;
 @Controller
 public class LoginControlador {
 
+    private double xOffset = 0;
+    private double yOffset = 0;
+
     @Autowired
     private UsuarioService usuarioService;
 
-
     @FXML
-    private TextField usuarioLogin;
+    private TextField usuarioLogin, passTextLogin;
 
     @FXML
     private PasswordField passwordLogin;
@@ -83,25 +89,48 @@ public class LoginControlador {
     @FXML
     private void togglePasswordVisibility() {
         if (showPass.isSelected()) {
-            passwordLogin.setPromptText(passwordLogin.getText());
-            passwordLogin.setText("");
-            passwordLogin.setStyle("-fx-prompt-text-fill: black;");
+            passTextLogin.setVisible(true);
+            passTextLogin.setManaged(true);
+            passwordLogin.setVisible(false);
+            passwordLogin.setManaged(false);
         } else {
-            passwordLogin.setText(passwordLogin.getPromptText());
-            passwordLogin.setPromptText("Password");
-            passwordLogin.setStyle("");
+            passTextLogin.setVisible(false);
+            passTextLogin.setManaged(false);
+            passwordLogin.setVisible(true);
+            passwordLogin.setManaged(true);
         }
     }
+    @FXML
+    private void minimizarVentana(ActionEvent event) {
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
+    }
 
-//    @FXML
-//    private void handleSubmit() {
-//        String password = passwordLogin.getText();
-//        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//        alert.setTitle("Password Submitted");
-//        alert.setHeaderText(null);
-//        alert.setContentText("Password: " + password);
-//        alert.showAndWait();
-//    }
+    @FXML
+    private void cerrarVentana(ActionEvent event) {
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void onMousePressed(MouseEvent event) {
+        Stage stage = (Stage) ((HBox) event.getSource()).getScene().getWindow();
+        xOffset = stage.getX() - event.getScreenX();
+        yOffset = stage.getY() - event.getScreenY();
+        ((HBox) event.getSource()).setCursor(Cursor.MOVE);
+    }
+
+    @FXML
+    private void onMouseDragged(MouseEvent event) {
+        Stage stage = (Stage) ((HBox) event.getSource()).getScene().getWindow();
+        stage.setX(event.getScreenX() + xOffset);
+        stage.setY(event.getScreenY() + yOffset);
+    }
+
+    @FXML
+    private void onMouseReleased(MouseEvent event) {
+        ((HBox) event.getSource()).setCursor(Cursor.DEFAULT);
+    }
 
     @FXML
     public void initialize() {
@@ -112,6 +141,7 @@ public class LoginControlador {
         mediaPlayer.play();
         usuarioLogin.addEventFilter(KeyEvent.KEY_TYPED, this::handleKeyTyped);
 //        passwordLogin.addEventFilter(KeyEvent.KEY_TYPED, this::handleKeyTyped);
+        passTextLogin.textProperty().bindBidirectional(passwordLogin.textProperty());
     }
 
 

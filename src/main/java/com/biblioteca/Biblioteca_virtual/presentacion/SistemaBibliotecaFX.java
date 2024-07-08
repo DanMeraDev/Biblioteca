@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
@@ -35,9 +36,10 @@ public class SistemaBibliotecaFX extends Application {
 
 
         Scene escena = new Scene(loader.load());
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(escena);
-        stage.setTitle("Bliblioteca Virtual");
 //        stage.setFullScreen(true);
+        stage.setResizable(false);
         stage.show();
     }
 
