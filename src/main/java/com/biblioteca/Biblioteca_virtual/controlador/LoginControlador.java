@@ -1,12 +1,16 @@
 package com.biblioteca.Biblioteca_virtual.controlador;
 
+import com.biblioteca.Biblioteca_virtual.modelos.Administrador;
 import com.biblioteca.Biblioteca_virtual.modelos.Persona;
 import com.biblioteca.Biblioteca_virtual.modelos.Usuario;
+import com.biblioteca.Biblioteca_virtual.servicios.AdministradorService;
 import com.biblioteca.Biblioteca_virtual.servicios.UsuarioService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -28,6 +32,9 @@ public class LoginControlador {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private AdministradorService administradorService;
+
     @FXML
     private TextField usuarioLogin, passTextLogin;
 
@@ -43,48 +50,73 @@ public class LoginControlador {
     @FXML
     private MediaView mediaView;
 
+    @FXML
+    private Hyperlink registroLink;
 
 
 
     @FXML
-    private void eventKey(KeyEvent event) {
-
+    private void cargarRegister(ActionEvent event) {
+        MainControlador.loadStage("/templates/register.fxml", event);
     }
+
 
     @FXML
     private void accionIngresar(ActionEvent event) {
-        Object eventSource = event.getSource();
-        if (eventSource == loginButton) {
-            if (!usuarioLogin.getText().isEmpty() && !passwordLogin.getText().isEmpty()) {
+        if (!usuarioLogin.getText().isEmpty() && !passwordLogin.getText().isEmpty()) {
+            String user = usuarioLogin.getText();
 
-                String user = usuarioLogin.getText();
-                String pass = passwordLogin.getText();
+            Optional<Usuario> userBuscado;
+            Optional<Administrador> adminBuscado;
 
-                Optional<Persona> userBuscado = usuarioService.obtenerUsuarioPorNombre(user);
+            if (administradorService.obtenerAdministradorPorUsername(user).isPresent()) {
+                adminBuscado = administradorService.obtenerAdministradorPorUsername(user);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Acceso como ADMINISTRADOR concedido");
+                alert.setHeaderText(null);
+                alert.setContentText("Bienvenido/a nuevamente " + adminBuscado.get().getNombre());
+                alert.showAndWait();
+                MainControlador.loadStage("/templates/mainAdmin.fxml", event);
 
-                if (userBuscado.isPresent()) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Acceso concedido");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Bienvenido/a nuevamente " + userBuscado.get().getNombre());
-                    alert.showAndWait();
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Acceso denegado");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Usuario o contraseña incorrectos ");
-                    alert.showAndWait();
-                }
+                // Cerrar la ventana de login
+                closeLoginWindow(event);
+
+            } else if (usuarioService.obtenerUsuarioPorUsername(user).isPresent()) {
+                userBuscado = usuarioService.obtenerUsuarioPorUsername(user);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Acceso concedido");
+                alert.setHeaderText(null);
+                alert.setContentText("Bienvenido/a nuevamente " + userBuscado.get().getNombre());
+                alert.showAndWait();
+                MainControlador.loadStage("/templates/mainUser.fxml", event);
+
+                // Cerrar la ventana de login
+                closeLoginWindow(event);
 
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Campos vacios");
+                alert.setTitle("Acceso denegado");
                 alert.setHeaderText(null);
-                alert.setContentText("Porfavor ingresar usuario y contraseña");
+                alert.setContentText("Usuario o contraseña incorrectos");
                 alert.showAndWait();
             }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Campos vacios");
+            alert.setHeaderText(null);
+            alert.setContentText("Porfavor ingresar usuario y contraseña");
+            alert.showAndWait();
+        }
+
+    }
+
+    private void closeLoginWindow(ActionEvent event) {
+        if (event != null && event.getSource() instanceof Node) {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
         }
     }
+
 
     @FXML
     private void togglePasswordVisibility() {
@@ -140,14 +172,23 @@ public class LoginControlador {
         mediaView.setMediaPlayer(mediaPlayer);
         mediaPlayer.play();
         usuarioLogin.addEventFilter(KeyEvent.KEY_TYPED, this::handleKeyTyped);
-//        passwordLogin.addEventFilter(KeyEvent.KEY_TYPED, this::handleKeyTyped);
+        passwordLogin.addEventFilter(KeyEvent.KEY_TYPED, this::handleKeyTyped);
         passTextLogin.textProperty().bindBidirectional(passwordLogin.textProperty());
-    }
+        usuarioLogin.setOnKeyPressed(this::handleKeyPressed);
+        passwordLogin.setOnKeyPressed(this::handleKeyPressed);
 
+    }
 
     private void handleKeyTyped(KeyEvent event) {
         if (event.getCharacter().equals(" ")) {
             event.consume();
         }
     }
+
+    private void handleKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            accionIngresar(null);
+        }
+    }
+
 }

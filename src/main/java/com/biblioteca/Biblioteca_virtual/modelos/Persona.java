@@ -10,14 +10,16 @@ public abstract class Persona {
     private Long id;
     private String nombre;
     private String correo;
+    private String usuario;
     private String clave;
 
     public Persona() {
     }
 
-    public Persona(String nombre, String correo, String clave) {
+    public Persona(String nombre, String correo, String usuario, String clave) {
         this.nombre = nombre;
         this.correo = correo;
+        this.usuario = usuario;
         this.clave = clave;
     }
 
@@ -43,6 +45,14 @@ public abstract class Persona {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getClave() {

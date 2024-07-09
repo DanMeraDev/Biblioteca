@@ -1,91 +1,228 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<HBox prefHeight="503.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.biblioteca.Biblioteca_virtual.controlador.LoginControlador">
+<HBox prefHeight="503.0" prefWidth="876.0" stylesheets="@../css/fonts.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.biblioteca.Biblioteca_virtual.controlador.RegisterControlador">
     <children>
-        <StackPane HBox.hgrow="ALWAYS">
-            <children>
-                <MediaView fx:id="mediaView" fitHeight="503.0" fitWidth="427.0" preserveRatio="false" />
-            </children>
-        </StackPane>
-        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="427.0" style="-fx-background-color: #EFEBE9;" HBox.hgrow="ALWAYS">
-            <children>
-                <Label text="Iniciar Sesión" textFill="#8d6e63">
-                    <font>
-                        <Font name="System Bold" size="40.0" />
-                    </font>
-                </Label>
-                <HBox alignment="CENTER" prefHeight="26.0" prefWidth="427.0" spacing="10.0">
+      <VBox style="-fx-background-color: #EFEBE9;" HBox.hgrow="ALWAYS">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <children>
+                <HBox alignment="TOP_RIGHT" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" prefHeight="26.0" prefWidth="854.0">
                     <children>
-                        <Label text="Aún no tienes cuenta?" textFill="#8d6e63" />
-                        <Hyperlink text="Registrate aquí" />
-                    </children>
-                </HBox>
-                <VBox prefHeight="200.0" prefWidth="100.0">
-                    <children>
-                        <Label text="Usuario" textFill="#8d6e63">
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+                        <Button mnemonicParsing="false" onAction="#minimizarVentana" prefHeight="28.0" prefWidth="16.0" style="-fx-background-color: #EFEBE9;" text="-" textFill="#8d6e63">
                             <font>
-                                <Font name="System Bold" size="20.0" />
+                                <Font name="System Bold" size="22.0" />
                             </font>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Label>
-                        <TextField fx:id="usuarioLogin" onKeyTyped="#eventKey" promptText="Ingrese su usuario" style="-fx-background-color: #EFEBE9; -fx-border-color: #8d6e63; -fx-border-radius: 5px;">
+                            <HBox.margin>
+                                <Insets right="-7.0" top="-7.0" />
+                            </HBox.margin>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#cerrarVentana" style="-fx-background-color: #EFEBE9;" text="x" textFill="#8d6e63">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="22.0" />
                             </font>
-                        </TextField>
-                        <Label text="Contraseña" textFill="#8d6e63">
-                            <font>
-                                <Font name="System Bold" size="20.0" />
-                            </font>
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                        </Label>
-                        <PasswordField fx:id="passwordLogin" onKeyTyped="#eventKey" promptText="Ingrese su contraseña" style="-fx-background-color: #EFEBE9; -fx-border-color: #8d6e63; -fx-border-radius: 5px;">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </PasswordField>
-                        <CheckBox mnemonicParsing="false" text="Ver Contraseña" textFill="#8d6e63">
-                            <VBox.margin>
-                                <Insets top="10.0" />
-                            </VBox.margin>
-                            <font>
-                                <Font name="System Bold" size="12.0" />
-                            </font>
-                        </CheckBox>
-                        <Button fx:id="loginButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#accionIngresar" style="-fx-background-color: #8d6e63;" text="Ingresar" textFill="#efebe9">
-                            <font>
-                                <Font name="System Bold" size="18.0" />
-                            </font>
-                            <VBox.margin>
-                                <Insets top="20.0" />
-                            </VBox.margin>
+                            <HBox.margin>
+                                <Insets top="-7.0" />
+                            </HBox.margin>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
                         </Button>
                     </children>
-                    <VBox.margin>
-                        <Insets left="30.0" right="30.0" />
-                    </VBox.margin>
-                </VBox>
-            </children>
-            <HBox.margin>
-                <Insets />
-            </HBox.margin>
-        </VBox>
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                </HBox>
+              <VBox alignment="TOP_CENTER" prefHeight="441.0" prefWidth="876.0" style="-fx-background-color: #EFEBE9;">
+                  <children>
+                      <Label stylesheets="@../css/fonts.css" text="Registrate" textFill="#8d6e63">
+                          <font>
+                              <Font name="SansSerif Bold" size="40.0" />
+                          </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                      </Label>
+                  <HBox alignment="CENTER" prefHeight="24.0" prefWidth="854.0" spacing="10.0">
+                     <children>
+                        <Label text="Ya tienes cuenta?" textFill="#8d6e63" />
+                        <Hyperlink onAction="#cargarLogin" style="-fx-text-fill: #8d6e63; -fx-underline: true;" text="Inicia Sesion" />
+                     </children>
+                  </HBox>
+                      <HBox alignment="CENTER" prefHeight="43.0" prefWidth="427.0" spacing="10.0">
+                     <children>
+                            <VBox prefHeight="353.0" prefWidth="422.5">
+                                <children>
+                              <VBox prefHeight="200.0" prefWidth="0.0">
+                                 <children>
+                                          <Label text="Nombre" textFill="#8d6e63">
+                                              <font>
+                                                  <Font name="SansSerif Bold" size="20.0" />
+                                              </font>
+                                              <VBox.margin>
+                                                  <Insets bottom="5.0" top="10.0" />
+                                              </VBox.margin>
+                                          </Label>
+                                          <TextField fx:id="registerNombre" promptText="Ingrese su usuario" style="-fx-background-color: #EFEBE9; -fx-border-color: #8d6e63; -fx-border-radius: 5px;">
+                                              <font>
+                                                  <Font size="18.0" />
+                                              </font>
+                                          </TextField>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Correo" textFill="#8d6e63">
+                                       <font>
+                                          <Font name="SansSerif Bold" size="20.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="registerCorreo" promptText="Ingrese su usuario" style="-fx-background-color: #EFEBE9; -fx-border-color: #8d6e63; -fx-border-radius: 5px;">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </TextField>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Facultad" textFill="#8d6e63">
+                                             <font>
+                                                <Font name="SansSerif Bold" size="20.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <ChoiceBox fx:id="registerFacultad" prefWidth="150.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                          <Label text="Celular" textFill="#8d6e63">
+                                              <font>
+                                                  <Font name="SansSerif Bold" size="20.0" />
+                                              </font>
+                                              <VBox.margin>
+                                                  <Insets bottom="5.0" top="10.0" />
+                                              </VBox.margin>
+                                          </Label>
+                                    <TextField fx:id="registerCelular" promptText="Ingrese su usuario" style="-fx-background-color: #EFEBE9; -fx-border-color: #8d6e63; -fx-border-radius: 5px;">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                                </children>
+                            </VBox>
+                        <VBox prefHeight="353.0" prefWidth="422.5">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Apellido" textFill="#8d6e63">
+                                       <font>
+                                          <Font name="SansSerif Bold" size="20.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="registerApellido" promptText="Ingrese su usuario" style="-fx-background-color: #EFEBE9; -fx-border-color: #8d6e63; -fx-border-radius: 5px;">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Usuario" textFill="#8d6e63">
+                                       <font>
+                                          <Font name="SansSerif Bold" size="20.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="registerUsuario" promptText="Ingrese su usuario" style="-fx-background-color: #EFEBE9; -fx-border-color: #8d6e63; -fx-border-radius: 5px;">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </TextField>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="DNI" textFill="#8d6e63">
+                                             <font>
+                                                <Font name="SansSerif Bold" size="20.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField fx:id="registerDNI" promptText="Ingrese su usuario" style="-fx-background-color: #EFEBE9; -fx-border-color: #8d6e63; -fx-border-radius: 5px;">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Contraseña" textFill="#8d6e63">
+                                       <font>
+                                          <Font name="SansSerif Bold" size="20.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <PasswordField fx:id="registerPass" promptText="Ingrese su contraseña" style="-fx-background-color: #EFEBE9; -fx-border-color: #8d6e63; -fx-border-radius: 5px;">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </PasswordField>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                      </HBox>
+                  <Button fx:id="registerBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#registrarUsuario" style="-fx-background-color: #8d6e63;" text=" Registrarse" textFill="#efebe9">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Button>
+                  </children>
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0" />
+               </VBox.margin>
+              </VBox>
+         </children>
+      </VBox>
     </children>
 </HBox>

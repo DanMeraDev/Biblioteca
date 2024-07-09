@@ -6,6 +6,6 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.biblioteca.Biblioteca_virtual.controlador.MainControlador">
    <children>
-      <Label layoutX="272.0" layoutY="182.0" text="HOLA MUNDO" />
+      <Label layoutX="272.0" layoutY="182.0" text="HOLA MUNDO user" />
    </children>
 </AnchorPane>

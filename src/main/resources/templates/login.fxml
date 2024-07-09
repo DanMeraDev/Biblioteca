@@ -63,7 +63,7 @@
             <HBox alignment="CENTER" prefHeight="26.0" prefWidth="427.0" spacing="10.0">
                <children>
                   <Label stylesheets="@../css/fonts.css" text="Aún no tienes cuenta?" textFill="#8d6e63" />
-                  <Hyperlink style="-fx-text-fill: #8d6e63; -fx-underline: true;" text="Registrate aquí" />
+                  <Hyperlink fx:id="registroLink" onAction="#cargarRegister" style="-fx-text-fill: #8d6e63; -fx-underline: true;" text="Registrate aquí" />
                </children>
             </HBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
@@ -76,7 +76,7 @@
                         <Insets bottom="5.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="usuarioLogin" onKeyTyped="#eventKey" promptText="Ingrese su usuario" style="-fx-background-color: #EFEBE9; -fx-border-color: #8d6e63; -fx-border-radius: 5px;">
+                  <TextField fx:id="usuarioLogin" promptText="Ingrese su usuario" style="-fx-background-color: #EFEBE9; -fx-border-color: #8d6e63; -fx-border-radius: 5px;">
                      <font>
                         <Font size="18.0" />
                      </font>

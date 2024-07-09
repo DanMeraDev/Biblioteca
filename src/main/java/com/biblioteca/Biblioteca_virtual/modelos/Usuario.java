@@ -17,8 +17,8 @@ public class Usuario extends Persona{
     }
 
 
-    public Usuario(String nombre, String correo, String clave, String docIdentidad, String telefono, Facultad facultad, String codigoUnico, LocalDate fechaRetorno) {
-        super(nombre, correo, clave);
+    public Usuario(String nombre, String correo, String usuario, String clave, String docIdentidad, String telefono, Facultad facultad, String codigoUnico, LocalDate fechaRetorno) {
+        super(nombre, correo, usuario, clave);
         this.docIdentidad = docIdentidad;
         this.telefono = telefono;
         this.facultad = facultad;
